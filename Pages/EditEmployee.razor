@@ -77,6 +77,10 @@ else
 
             NavigateToOverviewPage();
         }
+        catch(DbUpdateConcurrencyException)
+        {
+            ErrorMessage = "The employee was modified by another user. Please, reload this page.";
+        }
         catch (Exception ex)
         {
             ErrorMessage = $"Error while saving the employee: {ex.Message}";

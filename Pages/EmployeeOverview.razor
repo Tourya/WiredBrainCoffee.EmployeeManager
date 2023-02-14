@@ -74,7 +74,7 @@ else
         await LoadData();
     }
 
-    private async Task LoadData() 
+    private async Task LoadData()
     {
         if (CurrentPage is null or < 1)
         {
@@ -111,11 +111,19 @@ else
 
         if (isOk)
         {
-            using var context = ContextFactory.CreateDbContext();
-            context.Employees.Remove(employee);
-            await context.SaveChangesAsync();
+            try
+            {
+                using var context = ContextFactory.CreateDbContext();
+                context.Employees.Remove(employee);
+                await context.SaveChangesAsync();
+            }
+            catch(DbUpdateConcurrencyException)
+            {
+                // If we get this exeption, the employee  was deleted or modified.
+                // After reloading the data below, let's ignore this exeption.
+            }
 
-            await LoadData();
+        await LoadData();
         }
     }
 }

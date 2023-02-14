@@ -21,5 +21,8 @@ namespace WiredBrainCoffee.EmployeeManager.Data.Models
 
         public Department? Department { get; set; }
 
+        [Timestamp]
+        public byte[]? Timestamp { get; set; }
+
     }
 }
