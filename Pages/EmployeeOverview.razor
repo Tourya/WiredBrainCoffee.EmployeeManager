@@ -90,7 +90,7 @@ else
         if (CurrentPage > TotalPages)
         {
             NavigationManager.NavigateTo($"/employees/list/{TotalPages}");
-            return;
+            return; 
         }
 
         StateContainer.EmployeeOverviewPage = CurrentPage.Value;
